@@ -6,10 +6,3 @@ spring:
     url: jdbc:postgresql://ec2-107-20-251-130.compute-1.amazonaws.com:5432/dcnrhoor4qiver?useSSL=false
     username: alckmitmdspcgu
     password: bc93973a72fab6702dc0079caaeb64cfcbf2d46b406238045e7801d301eb7c1a
-server:
-  port: 8080
-  address: localhost
-management:
-  server:
-    port: 9001
-    address: localhost
