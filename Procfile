@@ -1,1 +1,1 @@
-web: java -jar target/sao-judas-adocao.jar 
+web: java -jar target/api-teste-2.0.jar 
