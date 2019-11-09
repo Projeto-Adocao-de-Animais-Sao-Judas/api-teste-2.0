@@ -20,7 +20,6 @@ public class PessoaV1 implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name="id")
     private Integer id;
 

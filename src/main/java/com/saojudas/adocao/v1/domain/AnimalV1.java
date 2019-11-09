@@ -16,6 +16,9 @@ import java.io.Serializable;
 @Table(name="Animal")
 public class AnimalV1 implements Serializable {
 
+
+    private static final long serialVersionUID = -2891583101741255235L;
+
     @Column(name="id_animal")
     private Integer idAnimal;
 
