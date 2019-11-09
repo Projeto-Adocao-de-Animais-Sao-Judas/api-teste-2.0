@@ -20,7 +20,6 @@ public class FotoPessoaV1 implements Serializable {
 
     private static final long serialVersionUID = -3977148260989848666L;
 
-
     @Column(name="id_foto_pessoa")
     private Integer idFotoPessoa;
 
