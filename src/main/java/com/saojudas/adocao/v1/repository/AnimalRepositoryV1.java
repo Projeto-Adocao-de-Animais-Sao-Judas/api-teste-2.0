@@ -1,7 +1,6 @@
 package com.saojudas.adocao.v1.repository;
 
 import com.saojudas.adocao.v1.domain.AnimalV1;
-import com.saojudas.adocao.v1.domain.PessoaV1;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
