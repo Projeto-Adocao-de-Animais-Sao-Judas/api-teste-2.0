@@ -13,13 +13,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Foto_Animal")
+@Table(name="foto_animal")
 public class FotoAnimalV1 implements Serializable {
 
     private static final long serialVersionUID = -6316430889462225580L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idFotoAnimal")
     private Integer idFotoAnimal;
 
@@ -29,8 +29,8 @@ public class FotoAnimalV1 implements Serializable {
     @Column(name="descricao_foto_animal")
     private String descricaoFotoAnimal;
 
-    @Column(name="imagem")
-    private String OID;
+    @Column(name="imagem_url")
+    private String imagemUrl;
 
 
 }

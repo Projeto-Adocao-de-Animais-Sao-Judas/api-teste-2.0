@@ -8,10 +8,10 @@ import java.util.concurrent.TimeoutException;
 
 @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
 @Getter
-public class DatabaseTimeoutException extends TimeoutException {
+public class DatabaseException extends TimeoutException {
     private String message;
 
-    public DatabaseTimeoutException(String message) {
+    public DatabaseException(String message) {
         super(message);
         this.message = message;
     }

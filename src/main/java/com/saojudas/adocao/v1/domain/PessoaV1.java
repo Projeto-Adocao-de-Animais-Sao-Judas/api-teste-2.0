@@ -1,5 +1,6 @@
 package com.saojudas.adocao.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,36 +14,35 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name="pessoa_tb")
+@Table(name="pessoa")
 public class PessoaV1 implements Serializable {
 
     private static final long serialVersionUID = -2329540826512942631L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_pessoa")
+    private Integer idPessoa;
 
-    @Column(name="endereco")
-    private String endereco;
+    @Column(name="fk_pessoa_tipo_documento_id_tipo_documento")
+    private Integer fkPessoaTipoDocumentoIdTipoDocumento;
 
-    @Column(name="complemento")
-    private String complemento;
+    @Column(name="fk_login_pessoa_id_login")
+    private Integer fkLoginPessoaIdLogin;
 
-    @Column(name="numero")
-    private String numero;
+    @Column(name="fk_endereco_pessoa_id_endereco")
+    private Integer fkEnderecoPessoaIdEndereco;
 
-    @Column(name="cep")
-    private String cep;
+    @Column(name="telefone_pessoa")
+    private String telefonePessoa;
 
-    @Column(name="tel")
-    private String tel;
+    @Column(name="nome_pessoa")
+    private String nomePessoa;
 
-    @Column(name="cpf")
-    private String cpf;
+    @Column(name="email_pessoa")
+    private String emailPessoa;
 
-    @Column(name="timestamp")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String timestamp;
+    @Column(name="sexoPessoa")
+    private String sexoPessoa;
 
 }

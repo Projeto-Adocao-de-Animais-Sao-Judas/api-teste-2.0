@@ -13,18 +13,20 @@ public class PessoaDTOV1 implements Serializable {
 
     private static final long serialVersionUID = 1592208447572730365L;
 
-    private Integer id;
+    private Integer idPessoa;
 
-    private String endereco;
+    private Integer fkPessoaTipoDocumentoIdTipoDocumento;
 
-    private String complemento;
+    private Integer fkLoginPessoaIdLogin;
 
-    private String numero;
+    private Integer fkEnderecoPessoaIdEndereco;
 
-    private String cep;
+    private String nomePessoa;
 
-    private String tel;
+    private String emailPessoa;
 
-    private String cpf;
+    private String telefonePessoa;
+
+    private String sexoPessoa;
 
 }

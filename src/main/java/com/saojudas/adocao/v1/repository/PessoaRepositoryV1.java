@@ -9,8 +9,7 @@ import java.util.Optional;
 @Repository
 public interface PessoaRepositoryV1 extends JpaRepository<PessoaV1, Integer> {
 
-    Optional<PessoaV1> findById(Integer id);
+    Optional<PessoaV1> findByIdPessoa(Integer idPessoa);
     PessoaV1 save(PessoaV1 pessoa);
-    void delete(PessoaV1 pessoa);
-    void deleteById(Integer id);
+    void deleteByIdPessoa(Integer idPessoa);
 }

@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -15,11 +13,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Foto_Pessoa")
+@Table(name="foto_pessoa")
 public class FotoPessoaV1 implements Serializable {
 
     private static final long serialVersionUID = -3977148260989848666L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_foto_pessoa")
     private Integer idFotoPessoa;
 
@@ -29,8 +29,8 @@ public class FotoPessoaV1 implements Serializable {
     @Column(name="descricao_imagem")
     private String descricaoImagem;
 
-    @Column(name="imagem")
-    private String OID;
+    @Column(name="imagem_url")
+    private String imagemUrl;
 
 
 }

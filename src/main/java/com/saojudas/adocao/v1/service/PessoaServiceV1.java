@@ -1,7 +1,7 @@
 package com.saojudas.adocao.v1.service;
 
 
-import com.saojudas.adocao.exceptions.DatabaseTimeoutException;
+import com.saojudas.adocao.exceptions.DatabaseException;
 import com.saojudas.adocao.exceptions.EmptyRepositoryException;
 import com.saojudas.adocao.exceptions.ResourceNotFoundException;
 import com.saojudas.adocao.v1.domain.PessoaV1;
@@ -11,12 +11,14 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class PessoaServiceV1 {
 
@@ -26,38 +28,23 @@ public class PessoaServiceV1 {
 
     private final Type listType = new TypeToken<List<PessoaDTOV1>>() {}.getType();
 
-    public PessoaDTOV1 buscarPessoaPorId(Integer id) throws DatabaseTimeoutException, ResourceNotFoundException {
+    public PessoaDTOV1 buscarPessoaPorId(Integer idPessoa) throws DatabaseException, ResourceNotFoundException {
         try {
-            Optional<PessoaV1> pessoa =  pessoaRepositoryV1.findById(id);
+            Optional<PessoaV1> pessoa =  pessoaRepositoryV1.findByIdPessoa(idPessoa);
 
             if (pessoa.isPresent()) {
                 PessoaDTOV1 pessoaDTOV1 = modelMapper.map(pessoa.get(), PessoaDTOV1.class);
                 return pessoaDTOV1;
             } else {
-                throw new ResourceNotFoundException("pessoa", "id", String.valueOf(id));
+                throw new ResourceNotFoundException("pessoa", "id", String.valueOf(idPessoa));
             }
         } catch (Exception e) {
-            throw new DatabaseTimeoutException("nao deu pra inserir");
+            throw new DatabaseException(e.getMessage());
         }
     }
 
 
-    public PessoaV1 obterPessoa(Integer id) throws DatabaseTimeoutException, ResourceNotFoundException {
-        try {
-            Optional<PessoaV1> pessoa =  pessoaRepositoryV1.findById(id);
-
-            if (pessoa.isPresent()) {
-                return pessoa.get();
-            } else {
-                throw new ResourceNotFoundException("pessoa", "id", String.valueOf(id));
-            }
-        } catch (Exception e) {
-            throw new DatabaseTimeoutException("nao deu pra inserir");
-        }
-    }
-
-
-    public List<PessoaDTOV1> buscarPessoas() throws DatabaseTimeoutException, ResourceNotFoundException {
+    public List<PessoaDTOV1> buscarPessoas() throws DatabaseException, ResourceNotFoundException {
         try {
             Long totalPessoas = pessoaRepositoryV1.count();
 
@@ -66,44 +53,37 @@ public class PessoaServiceV1 {
                 List<PessoaDTOV1> pessoasDTOV1 = modelMapper.map(pessoas, listType);
                 return pessoasDTOV1;
             } else {
-                throw new EmptyRepositoryException("Ta vazio aqui");
+                throw new EmptyRepositoryException("Repositório vazio");
             }
         } catch (Exception e) {
-            throw new DatabaseTimeoutException("nao conectou");
+            throw new DatabaseException(e.getMessage());
         }
     }
 
-    public PessoaDTOV1 addPessoa(PessoaV1 pessoa) throws DatabaseTimeoutException {
+    public PessoaDTOV1 addPessoa(PessoaV1 pessoa) throws DatabaseException {
         try {
             PessoaV1 pessoaV1 = pessoaRepositoryV1.save(pessoa);
             PessoaDTOV1 pessoaDTOV1 = modelMapper.map(pessoaV1, PessoaDTOV1.class);
             return pessoaDTOV1;
         } catch (Exception e) {
-            throw new DatabaseTimeoutException("nao deu pra inserir");
+            throw new DatabaseException(e.getMessage());
         }
     }
 
-    public void updatePessoa(PessoaV1 pessoa) throws DatabaseTimeoutException {
+    public void updatePessoa(PessoaDTOV1 pessoa) throws DatabaseException {
         try {
-            pessoaRepositoryV1.save(pessoa);
+            PessoaV1 pessoaDTOV1 = modelMapper.map(pessoa, PessoaV1.class);
+            pessoaRepositoryV1.save(pessoaDTOV1);
         } catch (Exception e) {
-            throw new DatabaseTimeoutException("nao deu pra atualizar");
+            throw new DatabaseException(e.getMessage());
         }
     }
 
-    public void removerPessoa(PessoaV1 pessoa) throws DatabaseTimeoutException {
+    public void removerPessoaPorId(Integer idPessoa) throws DatabaseException {
         try {
-            pessoaRepositoryV1.delete(pessoa);
+            pessoaRepositoryV1.deleteByIdPessoa(idPessoa);
         } catch (Exception e) {
-            throw new DatabaseTimeoutException("nao deu pra deletar");
-        }
-    }
-
-    public void removerPessoaPorId(Integer id) throws DatabaseTimeoutException {
-        try {
-            pessoaRepositoryV1.deleteById(id);
-        } catch (Exception e) {
-            throw new DatabaseTimeoutException("nao deu pra remover por id");
+            throw new DatabaseException(e.getMessage());
         }
     }
 
