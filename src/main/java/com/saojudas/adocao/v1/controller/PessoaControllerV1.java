@@ -37,8 +37,8 @@ public class PessoaControllerV1 {
     @ApiOperation(value = "Buscar uma pessoa pelo seu id", response = PessoaDTOV1.class)
     @RequestMapping(value = "/get/pessoa/id/{idPessoa}", method = RequestMethod.GET, produces = "application/json")
     public PessoaDTOV1 buscarPessoaPorId(@PathVariable Integer idPessoa) throws DatabaseException {
-        PessoaDTOV1 pessoa = pessoaService.buscarPessoaPorId(idPessoa);
-        return pessoa;
+        PessoaDTOV1 pessoaDTOV1 = pessoaService.buscarPessoaPorId(idPessoa);
+        return pessoaDTOV1;
     }
 
     @ApiOperation(value = "Retornar todas as pessoa")
@@ -101,10 +101,5 @@ public class PessoaControllerV1 {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
-
-
 
 }
